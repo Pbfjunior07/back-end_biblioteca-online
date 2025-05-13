@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Livro = sequelize.define('Livro', {
+  // id será gerado automaticamente pelo Sequelize
   titulo: {
     type: DataTypes.STRING,
     allowNull: false
@@ -10,7 +11,16 @@ const Livro = sequelize.define('Livro', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  ano: {
+  isbn: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  },
+  anoPublicacao: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  quantidade: {
     type: DataTypes.INTEGER,
     allowNull: false
   }

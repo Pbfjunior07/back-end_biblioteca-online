@@ -15,6 +15,15 @@ Emprestimo.belongsTo(Usuario, { foreignKey: 'usuarioId' });
 // Um Usuário pode ter muitos Empréstimos
 Usuario.hasMany(Emprestimo, { foreignKey: 'usuarioId' });
 
+// Definindo as associações:
+// Um empréstimo está relacionado a um livro: o campo 'livroId' será a chave estrangeira.
+Emprestimo.belongsTo(Livro, { foreignKey: 'livroId', as: 'livro' });
+Livro.hasMany(Emprestimo, { foreignKey: 'livroId', as: 'emprestimos' });
+
+// Um empréstimo está relacionado a um usuário: o campo 'usuarioId' será a chave estrangeira.
+Emprestimo.belongsTo(Usuario, { foreignKey: 'usuarioId', as: 'usuario' });
+Usuario.hasMany(Emprestimo, { foreignKey: 'usuarioId', as: 'emprestimos' });
+
 // Sincroniza os modelos com o banco de dados
 sequelize.sync()
   .then(() => console.log('Banco de dados sincronizado.'))
